@@ -17,7 +17,14 @@ Mongoclient.connect(url, function(err, client){
         // insertData(collection, client);
 
         // Get all records
-        findData(collection, client);
+        // findData(collection, client);
+
+        //Updating a document
+        updateDoc(collection, client);
+
+        //Removing a document
+        // removeDoc(collection,client);
+
 
         
     }
@@ -27,12 +34,15 @@ function insertData(collection, client){
     var doc1 = {"Name":"Saran","Age":25, "Salary":100000,"Phone":8074006214}
     var doc2 = {"Name":"JK","Age":24, "Salary":90000,"Phone":9290040510}
 
+
     collection.insertMany([doc1, doc2],function(err,res){
         if(err){
             console.log("error inserting a document", err)
+            client.close()
         }
         else{
             console.log("successfully inserted records", res)
+            client.close()
         }
         client.close();
     });
@@ -42,6 +52,7 @@ function findData(collection, client){
     collection.find().toArray(function(err,res){
         if(err){
             console.log("error retriving data",err)
+            client.close()
         }
         else if(res.length){
             console.log(res);
@@ -49,6 +60,33 @@ function findData(collection, client){
         }
         else{
             console.log("no data found")
+            client.close()
+        }
+    })
+}
+
+function updateDoc(collection, client){
+    collection.update({Name:"Saran"},{$set:{Salary:120000}},function(err,res){
+        if(err){
+            console.log("Error updating the document",err)
+            client.close()
+
+        }
+        else{
+            console.log("Document updated successfully",res);
+            client.close()
+        }
+    })
+
+}
+
+function removeDoc(collection,client){
+    collection.remove({Name:"JK"},function(err,res){
+        if(err){
+        console.log("Error removing document", err)
+        }
+        else{
+            console.log("Removed the document successfully",res);
             client.close()
         }
     })
