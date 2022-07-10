@@ -13,17 +13,43 @@ Mongoclient.connect(url, function(err, client){
         console.log("Connected to the DB", url);
         var collection = db.collection("fromcode");
 
-        var doc1 = {"Name":"Saran","Age":25, "Salary":100000,"Phone":8074006214}
-        var doc2 = {"Name":"JK","Age":24, "Salary":90000,"Phone":9290040510}
+        // insert doucments
+        // insertData(collection, client);
 
-        collection.insertMany([doc1, doc2],function(err,res){
-            if(err){
-                console.log("error inserting a document", err)
-            }
-            else{
-                console.log("successfully inserted records", res)
-            }
-            client.close();
-        });
+        // Get all records
+        findData(collection, client);
+
+        
     }
 })
+
+function insertData(collection, client){
+    var doc1 = {"Name":"Saran","Age":25, "Salary":100000,"Phone":8074006214}
+    var doc2 = {"Name":"JK","Age":24, "Salary":90000,"Phone":9290040510}
+
+    collection.insertMany([doc1, doc2],function(err,res){
+        if(err){
+            console.log("error inserting a document", err)
+        }
+        else{
+            console.log("successfully inserted records", res)
+        }
+        client.close();
+    });
+}
+
+function findData(collection, client){
+    collection.find().toArray(function(err,res){
+        if(err){
+            console.log("error retriving data",err)
+        }
+        else if(res.length){
+            console.log(res);
+            client.close()
+        }
+        else{
+            console.log("no data found")
+            client.close()
+        }
+    })
+}
