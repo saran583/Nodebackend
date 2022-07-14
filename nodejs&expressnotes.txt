@@ -6,16 +6,7 @@ Nodejs is an enviroment to run JS outside browsers
 
 Some of the inbuilt Libraries in nodejs - [os, path, fs]
 
-
-----------------------------HTTP Module--------------------
-
-const server =http.createServer((req,res)=>{
-res.write("Welcome to our homepage");
-})
-
-
-//port number
-server.listen(5000)
+npm init -y creates a node project by taking the default parameters
 
 
 
