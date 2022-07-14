@@ -1,0 +1,21 @@
+Nodejs is an enviroment to run JS outside browsers
+
+// __dirname - path to the current directory
+// __filename - file name
+// process - info about the env where the program is being executed
+
+Some of the inbuilt Libraries in nodejs - [os, path, fs]
+
+
+----------------------------HTTP Module--------------------
+
+const server =http.createServer((req,res)=>{
+res.write("Welcome to our homepage");
+})
+
+
+//port number
+server.listen(5000)
+
+
+
