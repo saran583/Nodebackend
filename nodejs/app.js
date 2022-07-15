@@ -17,11 +17,29 @@ const server = http.createServer((req,res)=>{
             res.end(result)
         })
     }
+    else if(req.url === "/readasyncfile"){
+        getdata("../nodejs&expressnotes.txt").then((data)=>{
+            res.end(data);
+        })
+    }
     else{
         res.end("<h1>Oops! wrong page that does not exist</h1>  <p>Check out our homepage <a href='/home'>Home</a></p> ")
     }
 
 });
+
+const getdata = (path) =>{
+    return new Promise((resolve, reject)=>{
+        readFile(path, "utf8",(err,data)=>{
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(data);
+            }
+        })
+    })
+}
 
 server.listen(5000,()=>{
     console.log("the server is running")
