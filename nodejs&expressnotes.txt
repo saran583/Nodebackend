@@ -8,5 +8,13 @@ Some of the inbuilt Libraries in nodejs - [os, path, fs]
 
 npm init -y creates a node project by taking the default parameters
 
+few packages should be installed as dev dependency because when the application 
+is pushed into porduction the exisitng packeage should not cause the trouble 
+with the server features
 
+every version of the library installed comes in three decimal points like 15.16.17, 
+where the first value(15) means there is huge change in the functionality 
+and the second value(16) means there is a patch or minor changes and the 
+third value(17) means there is minute change or bug fixes in the library
 
+  
