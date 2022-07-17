@@ -1,5 +1,9 @@
 const http = require("http")
 const {readFile} = require("fs");
+const util  = require("util");
+const readFilePromise = util.promisify(readFile);
+
+
 const server = http.createServer((req,res)=>{
 
     if(req.url === "/about"){
@@ -22,6 +26,12 @@ const server = http.createServer((req,res)=>{
             res.end(data);
         })
     }
+    // reading file as a promise directly using utils
+    else if(req.url === "/readfileaspromise"){
+         getdataspromise(res)
+        // res.end(text);
+
+    }
     else{
         res.end("<h1>Oops! wrong page that does not exist</h1>  <p>Check out our homepage <a href='/home'>Home</a></p> ")
     }
@@ -39,6 +49,13 @@ const getdata = (path) =>{
             }
         })
     })
+}
+
+const getdataspromise = async (res) =>{
+    const data = await readFilePromise("../nodejs&expressnotes.txt","utf8");
+    console.log("this is data",data)
+    res.end(data)
+    return data;
 }
 
 server.listen(5000,()=>{

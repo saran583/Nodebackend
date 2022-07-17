@@ -17,4 +17,7 @@ where the first value(15) means there is huge change in the functionality
 and the second value(16) means there is a patch or minor changes and the 
 third value(17) means there is minute change or bug fixes in the library
 
-  
+Promises
+
+when a import function needs to be taken as a promise then we can directly add .promises after the require call
+eg: const {readFile} from require("fs).promises;
