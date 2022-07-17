@@ -21,3 +21,12 @@ Promises
 
 when a import function needs to be taken as a promise then we can directly add .promises after the require call
 eg: const {readFile} from require("fs).promises;
+
+
+Events
+
+A EventEmitter consists of two methods that is on and emit where "emit" is used to trigger the data and the
+"on" is used as a listener to listen from the emitter
+
+The listener should be declared before the emit because the listener should be listening already to catch the emit
+

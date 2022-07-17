@@ -2,7 +2,10 @@ const http = require("http")
 const {readFile} = require("fs");
 const util  = require("util");
 const readFilePromise = util.promisify(readFile);
+const EventEmitter =  require("events");
 
+
+const Emitter = new EventEmitter();
 
 const server = http.createServer((req,res)=>{
 
@@ -32,6 +35,9 @@ const server = http.createServer((req,res)=>{
         // res.end(text);
 
     }
+    else if(req.url === "/triggerevent"){
+        Emitter.emit("response", res);
+    }
     else{
         res.end("<h1>Oops! wrong page that does not exist</h1>  <p>Check out our homepage <a href='/home'>Home</a></p> ")
     }
@@ -57,6 +63,11 @@ const getdataspromise = async (res) =>{
     res.end(data)
     return data;
 }
+
+Emitter.on("response",(res)=>{
+    console.log("the event is triggered");
+    res.end("the event is triggered thank you for nothing")
+})
 
 server.listen(5000,()=>{
     console.log("the server is running")
