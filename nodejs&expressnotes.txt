@@ -30,3 +30,25 @@ A EventEmitter consists of two methods that is on and emit where "emit" is used 
 
 The listener should be declared before the emit because the listener should be listening already to catch the emit
 
+Streams
+
+Streams are used to read/write data sequentially, 
+Four types of streams 
+
+    Writable - to write data
+    Readable - to read data sequentially
+    Duplex - To read and write data
+    Transform - to Transform data while reading or writing data
+
+
+HTTP client
+
+to access different kinds of data there are different kinds of ports for example 
+20 -  used for file transfer
+80 -  http 
+443 - https for http over tls/ssl
+
+
+When sending a html project with different files we need to create different endpoints for each file
+
+

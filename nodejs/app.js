@@ -3,17 +3,21 @@ const {readFile} = require("fs");
 const util  = require("util");
 const readFilePromise = util.promisify(readFile);
 const EventEmitter =  require("events");
-
+const {readFileSync } = require("fs");
 
 const Emitter = new EventEmitter();
+const homepage = readFileSync("../index.html");
 
 const server = http.createServer((req,res)=>{
 
     if(req.url === "/about"){
         res.end("Welcome to the About page")
     }
+
+    //sending html data from the backend
     else if(req.url === "/" || req.url === "/home"){
-        res.end("Welcome to the Homepage")
+        res.writeHead(200,{"content-type":"text/html"})
+        res.end(homepage);
     }
     else if(req.url === "/readfile"){
         readFile("../nodejs&expressnotes.txt",'utf8',(err, result)=>{
