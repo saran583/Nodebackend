@@ -6,7 +6,11 @@ const EventEmitter =  require("events");
 const {readFileSync } = require("fs");
 
 const Emitter = new EventEmitter();
-const homepage = readFileSync("../index.html");
+const homepage = readFileSync("./navbar/index.html");
+const homelogo = readFileSync("./navbar/logo.svg");
+const homestyles = readFileSync("./navbar/styles.css");
+const homescript = readFileSync("./navbar/browser-app.js");
+
 
 const server = http.createServer((req,res)=>{
 
@@ -19,6 +23,20 @@ const server = http.createServer((req,res)=>{
         res.writeHead(200,{"content-type":"text/html"})
         res.end(homepage);
     }
+    // when sending project linked with multiple files then each need to have a api call seperately
+    else if (req.url === "/logo.svg"){
+        res.writeHead(200,{"content-type":"image/svg+xml"});
+        res.end(homelogo);
+    }
+    else if(req.url ===  "/styles.css"){
+        res.writeHead(200, {"content-type":"text/css"});
+        res.end(homestyles)
+    }
+    else if(req.url === "/browser-app.js"){
+        res.writeHead(200,{"content-type":"text/javascript"});
+        res.end(homescript);
+    }
+
     else if(req.url === "/readfile"){
         readFile("../nodejs&expressnotes.txt",'utf8',(err, result)=>{
             if(err){
@@ -43,6 +61,7 @@ const server = http.createServer((req,res)=>{
         Emitter.emit("response", res);
     }
     else{
+        res.writeHead(404)
         res.end("<h1>Oops! wrong page that does not exist</h1>  <p>Check out our homepage <a href='/home'>Home</a></p> ")
     }
 
