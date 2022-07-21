@@ -21,21 +21,21 @@
      "Jedi": "no"
     },
     {
-        "Name": "Anakin",
+        "Name": "Anakint",
         "Gender": "male", 
         "Homeworld": "Tatooine",
         "Born": "41.9BBY",
         "Jedi": "yes"
     },
     {
-        "Name": "Amidala",
+        "Name": "Amidalia",
         "Gender": "female", 
         "Homeworld": "Naboo",
         "Born": "46BBY",
         "Jedi": "no"
     },
     {
-        "Name": "R2-D2",
+        "Name": "R2-D3",
         "Gender": "unknown",
         "Homeworld": "Naboo",
         "Born": "33BBY",

@@ -16,12 +16,46 @@ const data = require("./data.json");
 
 app.use(express.static('./navbar'))
 
+// Querying using the get request
+app.get("/api/isjedi",(req,res)=>{
+    // api call - http://localhost:5000/api/isjedi?name=anakin&world=tatooine
+    console.log(req.query);
+    var hero = data.find(heros=>heros.Name.toLowerCase() == req.query.name && heros.Homeworld.toLowerCase() == req.query.world)
+    if(hero){
+        res.send(hero.Jedi);
+    }
+    else{
+        res.status(404).send("No hero matches with given data");
+    }
+})
+
+app.get("/selectiveheros",(req,res)=>{
+    // http://localhost:5000/selectiveheros?search=A&limit=3
+    console.log(req.query);
+    const {search, limit} = req.query;
+    var heros = data;
+    if(search){
+        heros = data.filter((hero)=>{return hero.Name.startsWith(search)});
+    }
+    if(limit){
+        heros=heros.slice(0,Number(limit));
+    }
+    console.log(heros);
+    if(heros.length<1){
+        res.status(200).send("No heros matching with the query")
+    }
+    else{
+        res.status(200).json(heros);
+    }
+
+})
+
 
 app.get('/',(req,res)=>{
     res.send("Hello")
 })
 
-app.get("/herodata",(req,res)=>{
+app.get("/herosdata",(req,res)=>{
     res.status(200).json(data);
 })
 
@@ -33,6 +67,19 @@ app.get("/heros",(req,res)=>{
     });
     res.status(200).json(heros);
 
+})
+
+// Route params
+app.get("/herodetails/:heroname",(req,res)=>{
+    const hero = data.find((hero)=>hero.Name === req.params.heroname);
+    if(!hero){
+        res.status(404).send("Hero does not exist in the Database")
+    }
+    res.status(200).json(hero)
+});
+
+app.get("/herodetails/:heroname/presence/:season",(req,res)=>{
+    res.send(` ${req.params.heroname} presence in season ${req.params.season} is unknown yet`)
 })
 
 app.get("/about",(req,res)=>{
