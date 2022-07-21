@@ -6,12 +6,12 @@
   "scripts": {
     "start": "nodemon app.js",
     "dev": "nodemon app.js"
-
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "http": "*"
+    "http": "*",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
