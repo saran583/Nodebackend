@@ -2,6 +2,7 @@ const express = require('express');
 const app =express();
 const path = require("path");
 const data = require("./data.json");
+const homepage = require("./routes/homepage");
 
 
 // static takes care of all the static files if there are 100 files linked to a html component instead of 
@@ -15,6 +16,10 @@ const data = require("./data.json");
 
 
 app.use(express.static('./navbar'))
+
+// this can be used setup the routes independently and also we can use the domain routes here to make is more simple for example
+// if in the heros page all the app start with api/starwars/season1/heros then we can decalre api/starwars/season1 in the app.use as that part of url is common for all the api calls in that route file
+app.use("/api",homepage);
 
 // Querying using the get request
 app.get("/api/isjedi",(req,res)=>{
